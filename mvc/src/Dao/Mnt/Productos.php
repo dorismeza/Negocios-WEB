@@ -57,14 +57,8 @@ class Productos extends Table
      *
      * @return array
      */
-    public static function getById(int $invPrdId)
-    {
-        $sqlstr = "SELECT * from `productos` where invPrdId=:invPrdId;";
-        $sqlParams = array("invPrdId" => $invPrdId);
-        return self::obtenerUnRegistro($sqlstr, $sqlParams);
-    }
 
-    /**
+      /**
      * Insert into Productos
      *
      * @param [type] $invPrdBrCod  description
@@ -78,6 +72,35 @@ class Productos extends Table
      *
      * @return void
      */
+    public static function getById(int $invPrdId)
+    {
+        $sqlstr = "SELECT * from `productos` where invPrdId=:invPrdId;";
+        $sqlParams = array("invPrdId" => $invPrdId);
+        return self::obtenerUnRegistro($sqlstr, $sqlParams);
+    }
+
+    public static function getByDesc(string $invPrdDsc)
+    {
+        $sqlstr = "SELECT * from `productos` where invPrdDsc like :invPrdDsc;";
+        $sqlParams = array("invPrdDsc" => "%".$invPrdDsc."%");
+        return self::obtenerRegistros($sqlstr, $sqlParams);
+    }
+
+    public static function getByprice(int $maximo, int $minimo )
+    {
+        $sqlstr = "SELECT * from `productos`  WHERE invPrdPrc BETWEEN :minimo AND :maximo ";
+        $sqlParams = array("maximo" => $maximo,"minimo"=> $minimo);
+        return self::obtenerRegistros($sqlstr, $sqlParams);
+    }
+
+    public static function getBypriceandDesc(string $invPrdDsc,int $maximo, int $minimo )
+    {
+        $sqlstr = "SELECT * from `productos`  WHERE invPrdDsc like :invPrdDsc;and invPrdPrc BETWEEN :minimo AND :maximo ";
+        $sqlParams = array("invPrdDsc" => "%".$invPrdDsc."%", "maximo" => $maximo,"minimo"=> $minimo);
+        return self::obtenerRegistros($sqlstr, $sqlParams);
+    }
+    
+  
     public static function insert(
         $invPrdBrCod,
         $invPrdCodInt,

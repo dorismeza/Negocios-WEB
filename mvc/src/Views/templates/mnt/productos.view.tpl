@@ -12,6 +12,8 @@
         <th>Estado</th>
         <th>Vendible</th>
         <th><a href="index.php?page=Mnt-Producto&mode=INS">Nuevo</a></th>
+              &NonBreakingSpace;
+        <a href="index.php?page=Mnt_BusquedaProducto">Buscar</a>
       </tr>
     </thead>
     <tbody>
@@ -26,6 +28,7 @@
           <a href="index.php?page=Mnt-Producto&mode=UPD&id={{invPrdId}}">Editar</a>
           &NonBreakingSpace;
           <a href="index.php?page=Mnt-Producto&mode=DEL&id={{invPrdId}}">Eliminar</a>
+          
         </td>
       </tr>
       {{endfor Productos}}

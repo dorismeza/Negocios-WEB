@@ -36,7 +36,7 @@ class Producto extends PublicController
     private $arrProductoTipo = array();
     private $arrModeDesc = array();
     private $arrEstados = array();
-
+   // private $arrPrecio = array();
     /**
      * Runs the controller
      *
@@ -76,6 +76,7 @@ class Producto extends PublicController
         $this->viewData["invPrdTipArr"] = array();
         $this->viewData["invPrdEst"] = "";
         $this->viewData["invPrdEstArr"] = array();
+        $this->viewData["invPrdPreArr"] = array();
         $this->viewData["invPrdVnd"] = "";
         $this->viewData["invPrdVndArr"] = array();
         $this->viewData["btnEnviarText"] = "Guardar";
@@ -86,7 +87,8 @@ class Producto extends PublicController
             "INS"=>"Nuevo Producto",
             "UPD"=>"Editando %s %s",
             "DSP"=>"Detalle de %s %s",
-            "DEL"=>"Eliminado %s %s"
+            "DEL"=>"Eliminado %s %s",
+            "BSC"=>"Buscando %s %s"
         );
 
         $this->arrEstados = array(
@@ -111,10 +113,19 @@ class Producto extends PublicController
             array("value" => "DSC", "text" => "Descontinuado"),
             array("value" => "INA", "text" => "Inactivo"),
         );
+/*
+        $this->arrPrecio = array(
+            array("value" => "0-20", "text" => "0-20"),
+            array("value" => "20-40", "text" => "20-40"),
+            array("value" => "40-60", "text" => "40-60"),
+            array("value" => "60-80", "text" => "60-80"),
+            array("value" => "80-100", "text" => "80-100"),
+        );*/
 
         $this->viewData["invPrdTipArr"] = $this->arrProductoTipo;
         $this->viewData["invPrdEstArr"] = $this->arrEstados;
         $this->viewData["invPrdVndArr"] = $this->arrProductoVendible;
+       // $this->viewData["invPrdPreArr"] = $this->arrPrecio;
 
     }
 
@@ -220,6 +231,17 @@ class Producto extends PublicController
                     );
                 }
                 break;
+                case 'BSC':
+                    $result = Productos::getByDesc(
+                        intval($this->viewData["invPrdDsc"])
+                    );
+                    if ($result) {
+                        \Utilities\Site::redirectToWithMsg(
+                            "index.php?page=mnt_productos",
+                            "Producto Eliminado Satisfactoriamente"
+                        );
+                    }
+                    break;
             }
         }
     }
