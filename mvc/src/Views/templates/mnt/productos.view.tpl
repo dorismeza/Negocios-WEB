@@ -1,3 +1,4 @@
+<br><br>
 <h1>Trabajar con Productos</h1>
 <section>
 
@@ -13,7 +14,7 @@
         <th>Vendible</th>
         <th><a href="index.php?page=Mnt-Producto&mode=INS">Nuevo</a></th>
               &NonBreakingSpace;
-        <a href="index.php?page=Mnt_BusquedaProducto">Buscar</a>
+        <a href="index.php?page=Mnt_BusquedaProducto">Buscar Productos</a>
       </tr>
     </thead>
     <tbody>

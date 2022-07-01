@@ -37,7 +37,7 @@ class BusquedaProducto extends PublicController
         $this->viewData["error_minimo"] = array();
         $this->viewData["invPrdDsc"] = "";
         $this->viewData["error_invPrdDsc"] = array();
-        $this->viewData["btnEnviarText"] = "Guardar";
+        $this->viewData["btnEnviarText"] = "Buscar";
 
     }
 
@@ -59,8 +59,14 @@ class BusquedaProducto extends PublicController
 
         if (Validators::IsEmpty($this->viewData["invPrdDsc"] || $this->viewData["maximo"] && $this->viewData["minimo"])) {
             $this->viewData["error_invPrdDsc"][]
-                = "La descripción es requerida";
+                = "Campo requerido";
+             $hasErrors = true;
+            $this->viewData["error_minimo"][]
+                = "Campo requerido";
             $hasErrors = true;
+            $this->viewData["error_maximo"][]
+                = "Campo requerido";
+             $hasErrors = true;
         }
         error_log(json_encode($this->viewData));
         // Ahora procedemos con las modificaciones al registro
