@@ -81,7 +81,7 @@ class Productos extends Table
 
     public static function getByDesc(string $invPrdDsc)
     {
-        $sqlstr = "SELECT * from `productos` where invPrdDsc like :invPrdDsc;";
+        $sqlstr = "SELECT * from `productos` where lower(invPrdDsc) like lower(:invPrdDsc);";
         $sqlParams = array("invPrdDsc" => "%".$invPrdDsc."%");
         return self::obtenerRegistros($sqlstr, $sqlParams);
     }
@@ -95,7 +95,7 @@ class Productos extends Table
 
     public static function getBypriceandDesc(string $invPrdDsc,int $maximo, int $minimo )
     {
-        $sqlstr = "SELECT * from `productos`  WHERE invPrdDsc like :invPrdDsc;and invPrdPrc BETWEEN :minimo AND :maximo ";
+        $sqlstr = "SELECT * from `productos`  WHERE lower(invPrdDsc) like lower(:invPrdDsc)and invPrdPrc BETWEEN :minimo AND :maximo ";
         $sqlParams = array("invPrdDsc" => "%".$invPrdDsc."%", "maximo" => $maximo,"minimo"=> $minimo);
         return self::obtenerRegistros($sqlstr, $sqlParams);
     }

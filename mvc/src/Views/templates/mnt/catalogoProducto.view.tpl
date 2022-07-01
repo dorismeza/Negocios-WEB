@@ -1,5 +1,5 @@
 <br /><br />
-<button class="btn btn-primary" name="btnCancelar" id="btnCancelar">Regresar</button>
+<button class="btn btn-primary" name="btnRegresar" id="btnRegresar">Regresar</button>
 <br />
 <h4 style="text-align: center;">Catalogo de Productos</h4>
 <div class="m-4">
@@ -22,9 +22,9 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('btnCancelar').addEventListener('click', function (e) {
+    document.getElementById('btnRegresar').addEventListener('click', function (e) {
       e.preventDefault(); e.stopPropagation(); window.location.href =
-        'index.php?page=mnt_productos';
+        'index.php?page=Mnt_BusquedaProducto';
     });
   });
 </script>
