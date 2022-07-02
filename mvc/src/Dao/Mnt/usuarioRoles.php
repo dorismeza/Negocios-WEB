@@ -30,7 +30,10 @@ class usuarioRoles extends Table{
         return self::executeNonQuery($sqlStr, array("rolescod" => $rolescod));
     }
 
-
+    public static function Eliminarusuariorol($usercod){
+        $sqlStr= "delete from roles_usuarios where usercod =:usercod;";
+        return self::executeNonQuery($sqlStr, array("usercod" => $usercod));
+    }
 
 }
 

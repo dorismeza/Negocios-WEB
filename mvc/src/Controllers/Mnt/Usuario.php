@@ -85,19 +85,24 @@ class Usuario extends PublicController
                 $viewData["hasErrors"] = true;
                 $viewData["Errors"][] = "El username no Puede Ir Vacio!";
             }
+            if ($viewData["mode"] != "DEL" || $viewData["mode"] != "UPD") {
             if (\Utilities\Validators::IsEmpty($viewData["userpswd"])) {
                 $viewData["hasErrors"] = true;
                 $viewData["Errors"][] = "El userpswd no Puede Ir Vacio!";
             }
+        }
             if (\Utilities\Validators::IsEmpty($viewData["userfching"])) {
                 $viewData["hasErrors"] = true;
                 $viewData["Errors"][] = "El userfching no Puede Ir Vacio!";
             }
-            if (!\Utilities\Validators::IsValidPassword($viewData["userpswd"])) {
-                $viewData["hasErrors"] = true;
-                $viewData["Errors"][] = "La contraseña debe tener al menos 8 caracteres una mayúscula, un número y un caracter especial.";
-            }
 
+            if ($viewData["mode"] != "DEL" || $viewData["mode"] != "UPD") {
+
+                if (!\Utilities\Validators::IsValidPassword($viewData["userpswd"])) {
+                    $viewData["hasErrors"] = true;
+                    $viewData["Errors"][] = "La contraseña debe tener al menos 8 caracteres una mayúscula, un número y un caracter especial.";
+                }
+            }
 
 
             /*if (($viewData["userpswdest"] == "INA"
@@ -164,8 +169,7 @@ class Usuario extends PublicController
                     case "UPD":
                         if (\Dao\Mnt\Usuarios::editarUsuario(
                             $viewData["useremail"],
-                            $viewData["username"],
-                            \Dao\Mnt\Usuarios::_hashPassword($viewData["userpswd"]),
+                            $viewData["username"],             
                             $viewData["userfching"],
                             $viewData["userpswdest"],
                             $viewData["userpswdexp"],
@@ -179,7 +183,7 @@ class Usuario extends PublicController
                         }
                         break;
                     case "DEL":
-                        if (\Dao\Mnt\Usuarios::eliminarUsuario(
+                        if (\Dao\Mnt\usuarioRoles::Eliminarusuariorol(intval($viewData["usercod"])) && \Dao\Mnt\Usuarios::eliminarUsuario(
                             intval($viewData["usercod"])
                         )) {
                             $this->yeah();
@@ -202,7 +206,7 @@ class Usuario extends PublicController
                 $viewData["usercod"] = $_GET["usercod"];
             } else {
 
-              
+
                 if ($viewData["mode"] !== "INS") {
                     $this->nope();
                 }
@@ -259,7 +263,11 @@ class Usuario extends PublicController
                 $viewData["editarUsuario"] = false;
             }
             if ($viewData["mode"] == "DEL") $viewData["readonly"] = "readonly";
-            if ($viewData["mode"] == "UPD") $viewData["editarFunciones"] = true;
+            if ($viewData["mode"] == "UPD"){
+                $viewData["readonly1"] = "readonly";
+                $viewData["editarFunciones"] = true;
+            }
+             
         }
         // Generar un token XSRF para evitar esos ataques
         $viewData["xsrftoken"] = md5($this->name . random_int(10000, 99999));

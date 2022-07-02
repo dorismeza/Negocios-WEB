@@ -12,7 +12,7 @@ class Usuarios extends Table{
 
     public static function obtenerUsuario($usercod)
     {
-        $sqlStr = "SELECT useremail, username, userpswd, date(userfching)userfching, userpswdest, date(userpswdexp)userpswdexp, userest, useractcod, userpswdchg, usertipo from usuario where usercod = :usercod;";
+        $sqlStr = "SELECT useremail, username,userpswd, date(userfching)userfching, userpswdest, date(userpswdexp)userpswdexp, userest, useractcod, userpswdchg, usertipo from usuario where usercod = :usercod;";
         return self::obtenerUnRegistro($sqlStr, array("usercod"=>intval($usercod)));
     }
 
@@ -33,13 +33,12 @@ class Usuarios extends Table{
         );
         return self::executeNonQuery($sqlstr, $parametros);
     }
-    public static function editarUsuario($useremail, $username,$userpswd, $userfching,$userpswdest, $userpswdexp,$userest, $useractcod,$userpswdchg, $usertipo,$usercod)
+    public static function editarUsuario($useremail, $username, $userfching,$userpswdest, $userpswdexp,$userest, $useractcod,$userpswdchg, $usertipo,$usercod)
     {
-        $sqlstr = "UPDATE usuario set useremail=:useremail, username=:username, userpswd=:userpswd, userfching=:userfching, userpswdest=:userpswdest, userpswdexp=:userpswdexp, userest=:userest, useractcod=:useractcod, userpswdchg=:userpswdchg, usertipo=:usertipo where usercod = :usercod;";
+        $sqlstr = "UPDATE usuario set useremail=:useremail, username=:username,  userfching=:userfching, userpswdest=:userpswdest, userpswdexp=:userpswdexp, userest=:userest, useractcod=:useractcod, userpswdchg=:userpswdchg, usertipo=:usertipo where usercod = :usercod;";
         $parametros = array(
             "useremail" =>  $useremail,
-            "username" =>  $username,
-            "userpswd" =>  $userpswd,
+            "username" =>  $username, 
             "userfching" =>  $userfching,
             "userpswdest" =>  $userpswdest,
             "userpswdexp" =>  $userpswdexp,
