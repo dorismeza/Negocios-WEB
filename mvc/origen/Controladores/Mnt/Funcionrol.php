@@ -38,7 +38,7 @@ class FuncionRol extends PublicController
             $viewData["rolescod"] = $_POST["rolescod"];
             switch ($viewData["mode"]) {
                 case "INS":
-                    // $this->yeah($viewData["rolescod"]);
+                    
                     dd($viewData);
                     break;
                 default:
@@ -52,10 +52,10 @@ class FuncionRol extends PublicController
             else if ($viewData["mode"] !== "INS") $this->nope();
         }
         if (isset($viewData["mode"])) {
-            // Obteniendo las funcioens en el rol.
+            
             $tmpRol = \Dao\Mnt\FuncionesRoles::obtenerFuncionesPorRol($viewData["rolescod"]);
             $counter = 0;
-            // dd($tmpRol);
+            
             foreach ($tmpRol as $rol) {
                 $viewData["rolesdsc"] = $rol["rolesdsc"];
                 $viewData["funciones"][$counter]["fncod"] = $rol["fncod"];
@@ -65,20 +65,20 @@ class FuncionRol extends PublicController
                 $viewData["funciones"][$counter]["fnexp"] = $rol["fnexp"];
                 $counter++;
             }
-            // Obteniendo las funciones que no estan en el rol.
+            
             $tmpNonFunciones = \Dao\Mnt\FuncionesRoles::obtenerNonFunciones($viewData["rolescod"]);
             foreach ($tmpNonFunciones as $nonFunciones) {
                 $viewData["nonFunciones"][$counter]["fncod"] = $nonFunciones["fncod"];
                 $viewData["nonFunciones"][$counter]["fndsc"] = $nonFunciones["fndsc"];
                 $counter++;
             }
-            // dd($viewData);
+            
 
-            // Insertamos la funcion al rol.
+            
             switch ($viewData["mode"]) {
                 case "INS":
                     $viewData["fncod"] = $_GET["fncod"];
-                    // dd($viewData["fncod"]);
+                    
                     if (\Dao\Mnt\FuncionesRoles::insertarFuncionRol(
                         $viewData["rolescod"],
                         $viewData["fncod"]
