@@ -53,7 +53,7 @@ class Funcion extends PublicController
         );
 
         if ($this->isPostBack()) {
-            // dd($_POST);
+            
             $viewData["mode"] = $_POST["mode"];
             $viewData["fncod"] = $_POST["fncod"];
             $viewData["fndsc"] = $_POST["fndsc"];
@@ -84,7 +84,7 @@ class Funcion extends PublicController
                 $viewData["hasErrors"] = true;
                 $viewData["Errors"][] = "Tipo de la funcion es incorrecto";
             }
-            // dd($viewData);
+            
             if (!$viewData["hasErrors"]) {
                 switch ($viewData["mode"]) {
                     case "INS":
