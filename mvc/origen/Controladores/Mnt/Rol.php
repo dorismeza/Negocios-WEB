@@ -56,11 +56,11 @@ class Rol extends PrivateController
             $viewData["xsrftoken"] = $_POST["xsrftoken"];
 
        
-            // Validar el XSRFTOKEN.
+            
             if (!isset($_SESSION["xsrftoken"]) || $viewData["xsrftoken"] != $_SESSION["xsrftoken"]) {
                 $this->nope();
             }
-            // Validaciones de errores.
+           
             if (\Utilities\Validators::IsEmpty($viewData["rolesdsc"])) {
                 $viewData["hasErrors"] = true;
                 $viewData["Errors"][] = "¡El nombre del rol no puede ir vacio!";
@@ -73,7 +73,7 @@ class Rol extends PrivateController
                 $viewData["hasErrors"] = true;
                 $viewData["Errors"][] = "Estado de la categoría es incorrecto";
             }
-            // Si no existe ningun error proceder a hacer lo siguiente.
+            
             if (!$viewData["hasErrors"]) {
                 switch ($viewData["mode"]) {
                     case "INS":
@@ -106,7 +106,7 @@ class Rol extends PrivateController
                 }
             }
         } else {
-            // Se ejecuta si se refresca o viene la peticion desde la lista.
+            
             if (isset($_GET["mode"])) {
                 if (!isset($modeDscArray[$_GET["mode"]])) $this->nope();
                 $viewData["mode"] = $_GET["mode"];
@@ -117,7 +117,7 @@ class Rol extends PrivateController
             }
         }
 
-        // Hacer elementos en común.
+      
         if ($viewData["mode"] == "INS") {
             $viewData["mode_dsc"] = $modeDscArray["INS"];
             $viewData["rolescod"] ="";
@@ -148,7 +148,7 @@ class Rol extends PrivateController
                 $viewData["readonly"] = "readonly";
             }
         }
-        // Generando un token para evitar ataques XSRF.
+       
         $viewData["xsrftoken"] = md5($this->name . random_int(10000, 99999));
         $_SESSION["xsrftoken"] = $viewData["xsrftoken"];
         Renderer::render("mnt/rol", $viewData);
