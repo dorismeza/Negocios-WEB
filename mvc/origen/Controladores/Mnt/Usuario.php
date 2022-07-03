@@ -58,7 +58,7 @@ class Usuario extends PublicController
         );
 
         if ($this->isPostBack()) {
-            // se ejecuta al dar click sobre guardar
+            
             $viewData["mode"] = $_POST["mode"];
             $viewData["usercod"] = $_POST["usercod"];
             $viewData["useremail"] = $_POST["useremail"];
@@ -72,11 +72,11 @@ class Usuario extends PublicController
             $viewData["userpswdchg"] = $_POST["userpswdchg"];
             $viewData["usertipo"] = $_POST["usertipo"];
             $viewData["xsrftoken"] = $_POST["xsrftoken"];
-            // Validate XSRF Token
+            
             if (!isset($_SESSION["xsrftoken"]) || $viewData["xsrftoken"] != $_SESSION["xsrftoken"]) {
                 $this->nope();
             }
-            // Validaciones de Errores
+            
             if (\Utilities\Validators::IsEmpty($viewData["useremail"])) {
                 $viewData["hasErrors"] = true;
                 $viewData["Errors"][] = "El useremail no Puede Ir Vacio!";
@@ -105,28 +105,16 @@ class Usuario extends PublicController
             }
 
 
-            /*if (($viewData["userpswdest"] == "INA"
-                || $viewData["userpswdest"] == "ACT"
-                || $viewData["userpswdest"] == "PLN"
-                ) == false
-            ) {
-                $viewData["hasErrors"] = true;
-                $viewData["Errors"][] = "userpswdest Incorrecto!";
-            }*/
+            
+                
 
             if (\Utilities\Validators::IsEmpty($viewData["userpswdexp"])) {
                 $viewData["hasErrors"] = true;
                 $viewData["Errors"][] = "El userpswdexp no Puede Ir Vacio!";
             }
 
-            /*if (($viewData["userest"] == "INA"
-                || $viewData["userest"] == "ACT"
-                || $viewData["userest"] == "PLN"
-                ) == false
-            ) {
-                $viewData["hasErrors"] = true;
-                $viewData["Errors"][] = "userest Incorrecto!";
-            }*/
+            
+               
 
             if (\Utilities\Validators::IsEmpty($viewData["useractcod"])) {
                 $viewData["hasErrors"] = true;
@@ -192,8 +180,7 @@ class Usuario extends PublicController
                 }
             }
         } else {
-            // se ejecuta si se refresca o viene la peticion
-            // desde la lista
+            
             if (isset($_GET["mode"])) {
                 if (!isset($modeDscArr[$_GET["mode"]])) {
                     $this->nope();
@@ -213,7 +200,7 @@ class Usuario extends PublicController
             }
         }
 
-        // Hacer elementos en comun
+        
 
         if ($viewData["mode"] == "INS") {
             $viewData["mode_dsc"]  = $modeDscArr["INS"];
@@ -239,7 +226,7 @@ class Usuario extends PublicController
             $viewData["usertipo_INA"] = $tmpUsuario["usertipo"] == "INA" ? "selected" : "";
             $viewData["usertipo_PLN"] = $tmpUsuario["usertipo"] == "PLN" ? "selected" : "";
 
-            // Obteniendo funciones del rol.
+            
             $viewData["funciones"] = \Dao\Mnt\usuarioRoles::obtenerRolesPorUsuario($viewData["usercod"]);
             $viewData["mode_dsc"]  = sprintf(
                 $modeDscArr[$viewData["mode"]],
@@ -269,7 +256,7 @@ class Usuario extends PublicController
             }
              
         }
-        // Generar un token XSRF para evitar esos ataques
+       
         $viewData["xsrftoken"] = md5($this->name . random_int(10000, 99999));
         $_SESSION["xsrftoken"] = $viewData["xsrftoken"];
         \Views\Renderer::render("mnt/usuario", $viewData);
