@@ -60,8 +60,7 @@ class usuarioRol extends PublicController
             // Obteniendo las funcioens en el rol.
             $tmpuser = \Dao\Mnt\usuarioRoles::obtenerRolesPorUsuario($viewData["usercod"],$viewData["rolescod"]);
             $counter = 0;
-            //dd($tmpuser);
-            //dd($tmpRol);
+            
             foreach ($tmpuser as $user) {
                 $viewData["rolesdsc"] = $user["rolesdsc"];
                 //$viewData["funciones"][$counter]["usercod"] = $user["usercod"];
@@ -70,7 +69,7 @@ class usuarioRol extends PublicController
                 //$viewData["funciones"][$counter]["roleuserest"] = $user["roleuserest"];
                 $counter++;
             }
-            // Obteniendo las funciones que no estan en el rol.
+            
             $tmpNonRoles = \Dao\Mnt\usuarioRoles::obtenerNonRoles($viewData["usercod"]);
             //dd($viewData);
             foreach ($tmpNonRoles as $nonFunciones) {
@@ -79,9 +78,9 @@ class usuarioRol extends PublicController
                 
                 $counter++;
             }
-            // dd($viewData["nonFunciones"]);
+            
 
-            // Insertamos la funcion al rol.
+            
             switch ($viewData["mode"]) {
                 case "INS":
                     $viewData["rolescod"] = $_GET["rolescod"];
