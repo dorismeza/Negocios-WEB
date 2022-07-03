@@ -39,18 +39,18 @@
     <input type="hidden" id="rolescod" name="rolescod" value="{{rolescod}}"/>
     <input type="hidden" id="mode" name="mode" value="{{mode}}" />
     <input type="hidden" id="xsrftoken" name="xsrftoken" value="{{xsrftoken}}" />
-    <input type="text" readonly name="rolcoddummy" value="{{rolescod}}"/>
+    <input type="text"  {{readonly}} {{readonly1}} name="rolescod"placeholder="escriba el codigo" value="{{rolescod}}"/>
     </section>
     <section>
       <label for="rolesdsc">Roles</label>
-      <input type="text" {{readonly}} name="rolesdsc" value="{{rolesdsc}}" maxlength="45" placeholder="Nombre de Categoría"/>
+      <input type="text"  {{readonly1}} name="rolesdsc" value="{{rolesdsc}}" maxlength="45" placeholder="Nombre de Categoría"/>
     </section>
     <section>
       <label for="rolesest">Estado</label>
       {{if readonly}}
        <input type="hidden" id="rolesestdummy" name="rolesest" value="" />
       {{endif readonly}}
-      <select id="rolesest" name="rolesest" {{if readonly}}disabled{{endif readonly}}>
+      <select id="rolesest" name="rolesest" {{readonly1}}>
         <option value="ACT" {{rolesest_ACT}}>Activo</option>
         <option value="INA" {{rolesest_INA}}>Inactivo</option>
         <option value="PLN" {{rolesest_PLN}}>Planificación</option>

@@ -51,7 +51,7 @@
     </section>
     <section>
       <label for="userpswd">Usuario password</label>
-      <input type="password" {{readonly}} name="userpswd" value="{{userpswd}}" maxlength="450" placeholder="Contraseña"/>
+      <input type="password" {{readonly}} {{readonly1}} name="userpswd" value="{{userpswd}}" maxlength="450" placeholder="Contraseña"/>
     </section>
     <section>
       <label for="userfching">Usuario fecha</label>

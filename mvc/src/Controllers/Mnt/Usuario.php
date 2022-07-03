@@ -96,7 +96,7 @@ class Usuario extends PublicController
                 $viewData["Errors"][] = "El userfching no Puede Ir Vacio!";
             }
 
-            if ($viewData["mode"] != "DEL" || $viewData["mode"] != "UPD") {
+            if ($viewData["mode"] == "INS" ) {
 
                 if (!\Utilities\Validators::IsValidPassword($viewData["userpswd"])) {
                     $viewData["hasErrors"] = true;

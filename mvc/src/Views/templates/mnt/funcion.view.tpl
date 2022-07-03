@@ -5,7 +5,7 @@
     <section>
     <label for="fncod">Código</label>
     <input type="hidden" id="fncod" name="fncod" value="{{fncod}}"/>
-    <input type="text" readonly name="fncoddummy" value="{{fncod}}"/>
+    <input type="text" {{readonly}}{{readonly1}} name="fncod" placeholder="Escriba el codigo" value="{{fncod}}"/>
     <input type="hidden" id="mode" name="mode" value="{{mode}}" />
     <input type="hidden" id="xsrftoken" name="xsrftoken" value="{{xsrftoken}}" />
     </section>
@@ -18,9 +18,9 @@
     <section>
       <label for="fnest">Estado</label>
       {{if readonly}}
-       <input type="hidden" id="fnestdummy" name="fnest" value="" />
+       <input type="hidden" id="fnestdummy" name="fnest" value="" {{readonly}}/>
       {{endif readonly}}
-      <select id="fnest" name="fnest" {{if readonly}}disabled{{endif readonly}}>
+      <select id="fnest" name="fnest" >
         <option value="ACT" {{fnest_ACT}}>Activo</option>
         <option value="INA" {{fnest_INA}}>Inactivo</option>
         <option value="PLN" {{fnest_PLN}}>Planificación</option>
@@ -32,7 +32,7 @@
       {{if readonly}}
        <input type="hidden" id="fntypdummy" name="fntyp" value="" />
       {{endif readonly}}
-      <select id="fntyp" name="fntyp" {{if readonly}}disabled{{endif readonly}}>
+      <select id="fntyp" name="fntyp" {{readonly}}>
         <option value="ACT" {{fntyp_ACT}}>Activo</option>
         <option value="INA" {{fntyp_INA}}>Inactivo</option>
         <option value="PLN" {{fntyp_PLN}}>Planificación</option>

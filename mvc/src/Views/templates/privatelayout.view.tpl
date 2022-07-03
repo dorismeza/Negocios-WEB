@@ -34,7 +34,8 @@
         {{endfor NAVIGATION}}
         <li><a href="index.php?page=sec_logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Salir</a></li>
         <li><a href="index.php?page=mnt_usuarios"><i class="fas fa-sign-out-alt"></i>&nbsp;Usuarios</a></li>
-         <li><a href="index.php?page=mnt_rol"><i class="fas fa-sign-out-alt"></i>&nbsp;Rol</a></li>
+         <li><a href="index.php?page=mnt_roles"><i class="fas fa-sign-out-alt"></i>&nbsp;Roles</a></li>
+         <li><a href="index.php?page=mnt_funciones"><i class="fas fa-sign-out-alt"></i>&nbsp;Funciones</a></li>
       </ul>
     </nav>
     {{with login}}

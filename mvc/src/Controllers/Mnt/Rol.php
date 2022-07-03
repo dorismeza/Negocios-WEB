@@ -3,7 +3,7 @@
 namespace Controllers\Mnt;
 
 use Controllers\PrivateController;
-use Controllers\PublicController;
+
 use Views\Renderer;
 
 class Rol extends PrivateController
@@ -54,6 +54,8 @@ class Rol extends PrivateController
             $viewData["rolesdsc"] = $_POST["rolesdsc"];
             $viewData["rolesest"] = $_POST["rolesest"];
             $viewData["xsrftoken"] = $_POST["xsrftoken"];
+
+       
             // Validar el XSRFTOKEN.
             if (!isset($_SESSION["xsrftoken"]) || $viewData["xsrftoken"] != $_SESSION["xsrftoken"]) {
                 $this->nope();
@@ -63,6 +65,7 @@ class Rol extends PrivateController
                 $viewData["hasErrors"] = true;
                 $viewData["Errors"][] = "¡El nombre del rol no puede ir vacio!";
             }
+            
             if (($viewData["rolesest"] == "INA" ||
                     $viewData["rolesest"] == "ACT" ||
                     $viewData["rolesest"] == "PLN") == false
@@ -75,7 +78,7 @@ class Rol extends PrivateController
                 switch ($viewData["mode"]) {
                     case "INS":
                         if (\Dao\Mnt\Roles::insertarRol(
-                            \Dao\Mnt\Roles::GUID(),
+                            $viewData["rolescod"],
                             $viewData["rolesdsc"],
                             $viewData["rolesest"]
                         )) {
@@ -93,7 +96,7 @@ class Rol extends PrivateController
                         }
                         break;
                     case "DEL":
-                        // dd($viewData["rolescod"]);
+                        
                         if (\Dao\Mnt\Roles::eliminarRol($viewData["rolescod"])) {
                             $this->yeah();
                         }
@@ -117,6 +120,7 @@ class Rol extends PrivateController
         // Hacer elementos en común.
         if ($viewData["mode"] == "INS") {
             $viewData["mode_dsc"] = $modeDscArray["INS"];
+            $viewData["rolescod"] ="";
         } else {
             // Obteniendo todos los roles.
             $tmpRol = \Dao\Mnt\Roles::obtenerRol($viewData["rolescod"]);
@@ -126,10 +130,8 @@ class Rol extends PrivateController
             $viewData["rolesest_PLN"] = $tmpRol["rolesest"] == "PLN" ? "selected" : "";
             // Obteniendo funciones del rol.
             $viewData["funciones"] = \Dao\Mnt\FuncionesRoles::obtenerFuncionesPorRol($viewData["rolescod"]);
-            // dd($viewData["funciones"]);
-            // dd($tmpFunciones);
+            
             $viewData["mode_dsc"] = sprintf(
-                // Descripción del título de la acción a realizarse.
                 $modeDscArray[$viewData["mode"]],
                 $viewData["rolescod"],
                 $viewData["rolesdsc"]
@@ -140,8 +142,11 @@ class Rol extends PrivateController
                 $viewData["quitarFuncion"] = false;
                 $viewData["editarFunciones"] = true;
             }
-            if ($viewData["mode"] == "DEL") $viewData["readonly"] = "readonly";
-            if ($viewData["mode"] == "UPD") $viewData["editarFunciones"] = true;
+            if ($viewData["mode"] == "DEL") $viewData["readonly1"] = "readonly";
+            if ($viewData["mode"] == "UPD"){
+                $viewData["editarFunciones"] = true;
+                $viewData["readonly"] = "readonly";
+            }
         }
         // Generando un token para evitar ataques XSRF.
         $viewData["xsrftoken"] = md5($this->name . random_int(10000, 99999));
